@@ -67,16 +67,21 @@
                 alert("Hai raggiunto il limite massimo di immagini");
                 return;
             }
-                   document.getElementById("new-img").innerHTML= `
-            <div class="d-flex">
+
+        let newInput = document.createElement("div");
+         newInput.classList.add("d-flex", "mb-2");
+
+          newInput.innerHTML= `
                 <span class="input-group-text mb-3" id="basic-addon3">https://example.com/photo.jpg</span>
                 <div class="mb-3 form-floating flex-grow-1">
                     <input type="text" class="form-control" id="image" placeholder="Inserisci l'URL dell'immagine"
                         required autocomplete="off" name="ImgListModel">
                     <label for="image" class="text-secondary">Product ImageURL</label>
-                </div>
-            </div>
-        `
+                </div> `;
+
+        document.getElementById("new-img").appendChild(newInput);        
+        imageIndex++;
+
         });
     </script>
 }
