@@ -1,0 +1,35 @@
+﻿@model ProductListModel
+
+@{
+    ViewData["Title"] = "Epizone - Home";
+}
+    <div class="container-fluid row row-cols-5" id="product-Container">
+    @if (Model.ProductsListModel != null)
+    {
+        foreach (var item in Model.ProductsListModel)
+        {
+            <div class="col">
+                <div class="card  mb-3">
+                    <div class="img-container">
+                        <img class="card-img-top" src="@item.ImgListModel[0].ImgUrl" alt="@item.Name">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text mt-3">
+                            @item.Description
+                        </p>
+                        <div class=" d-grid gap-3 d-lg-flex justify-content-center mb-2">
+                            <a class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil-square" id="add"> Modifica</i>
+                            </a>
+                            <a class="btn btn-info btn-sm" asp-controller="Epizone" asp-action="Details" asp-route-id="@item.Id">Scopri di più</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    </div>
+
+
+

@@ -1,0 +1,84 @@
+﻿@model ProductAddModel
+@{
+	ViewData["Title"] = "Epizone - Aggiunta Prodotto";
+}
+
+
+<div class="container">
+	<h1>Aggiungi il tuo prodotto</h1>
+	<form id="prodForm" class="mt-4" asp-controller="Epizone" asp-action="AddSave">
+		<div class="mb-3 form-floating">
+			<input type="text" class="form-control" id="name" placeholder="Inserisci il nome del prodotto" required
+				   autocomplete="off" asp-for="Name">
+			<label for="Name" class="text-secondary">Product Name</label>
+		</div>
+		<div class=" d-flex gap-3 mb-4">
+			<div class="col form-floating">
+				<input type="text" class="form-control" id="brand" placeholder=" Inserisci la marca"
+					   aria-label="Brand" required autocomplete="off" asp-for="Brand">
+				<label for="Brand" class="text-secondary">Brand</label>
+			</div>
+			<div class="col form-floating">
+
+				<input type="number" class="form-control" id="price" placeholder="€" aria-label="Price" required
+					   autocomplete="off" step="0.01" asp-for="Price">
+				<label for="price" step="1" class="text-secondary">Price</label>
+			</div>
+		</div>
+
+		
+		<div class="d-flex">
+			<span class="input-group-text mb-3" id="basic-addon3">https://example.com/photo.jpg</span>
+			<div class="mb-3 form-floating flex-grow-1">
+
+				<input type="text" class="form-control" id="image" placeholder="Inserisci l'URL dell'immagine"
+					   required autocomplete="off" name="ImgListModel">
+				<label for="image" class="text-secondary">Product ImageURL</label>
+			</div>
+		</div>
+
+			@for (int i = 1; i <= 4; i++)
+			{
+				<div class="extra-field" id="field-@i" style="display: none;">
+					@await Html.PartialAsync("_ImgInputFieldPartial", i)
+				</div>
+			}
+
+		<a class="btn btn-light mb-3 btn-sm" id="add-btn"> Aggiungi immagine</a>
+
+		<div class="form-floating mb-3">
+			<textarea class="form-control" placeholder="Leave a comment here" id="description"
+					  style="height: 100px" asp-for="Description"></textarea>
+			<label for="description" class="text-secondary">Descrizione del prodotto</label>
+		</div>
+		<div class="container-fluid gap-3 d-flex justify-content-between p-0">
+			<div id="delete">
+			</div>
+			<div>
+				<button type="button" class="btn btn-outline-dark">Reset</button>
+				<button type="submit" class="btn btn-success">Aggiungi</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+
+
+}
+
+<script>
+
+	 document.getElementById("add-btn").addEventListener("click", function () {
+		let fields = document.querySelectorAll(".extra-field");
+
+		for (let i = 0; i < fields.length; i++) {
+			if (fields[i].style.display === "none") {
+				fields[i].style.display = "block";
+				return;}
+		}
+
+		alert("Hai raggiunto il limite massimo di immagini");
+	});
+</script>
