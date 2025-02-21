@@ -1,4 +1,5 @@
-﻿using E_Commerce_B_W2_Project.Models;
+﻿using System.Xml.Linq;
+using E_Commerce_B_W2_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce_B_W2_Project.Controllers
@@ -56,7 +57,8 @@ namespace E_Commerce_B_W2_Project.Controllers
         }
 
         [HttpGet("Details/{id:guid}")]
-        public IActionResult Details(Guid id) {
+        public IActionResult Details(Guid id)
+        {
 
             var singleProd = productStaticList.FirstOrDefault(item => item.Id == id);
             if (singleProd == null)
@@ -64,7 +66,7 @@ namespace E_Commerce_B_W2_Project.Controllers
                 TempData["Error"] = "Il prodotto cercato non esiste nei nostri archivi!";
                 return RedirectToAction("Index");
             }
-                        
+
             return View(singleProd);
         }
         public IActionResult Add() { return View(); }
@@ -101,6 +103,80 @@ namespace E_Commerce_B_W2_Project.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet("Manage/{id:guid}")]
+        public IActionResult Manage(Guid id)
+        {
+
+            var singleProd = productStaticList.FirstOrDefault(item => item.Id == id);
+            if (singleProd == null)
+            {
+                TempData["Error"] = "Il prodotto cercato non esiste nei nostri archivi!";
+                return RedirectToAction("Index");
+            }
+
+            var productDetails = new ProductDetailsModel
+            {
+                Id = singleProd.Id,
+                Name = singleProd.Name,
+                Brand = singleProd.Brand,
+                Price = singleProd.Price,
+                Description = singleProd.Description,
+                ImgList = singleProd.ImgListModel,
+
+            };
+
+            return View(productDetails);
+        }
+
+
+        [HttpPost("Manage/Save/{id:guid}")]
+        public IActionResult SaveEdit(Guid id, ProductDetailsModel item)
+        {
+            var singleProd = productStaticList.FirstOrDefault(item => item.Id == id);
+            if (singleProd == null)
+            {
+                TempData["Error"] = "Il prodotto cercato non esiste nei nostri archivi!";
+                return RedirectToAction("Index");
+            }
+
+
+            singleProd.Name = item.Name;
+            singleProd.Description = item.Description;
+            singleProd.Price = item.Price;
+            singleProd.Brand = item.Brand;
+
+            singleProd.ImgListModel = item.ImgListModel.Select(x => new ImgSrc
+            {
+                Id = Guid.NewGuid(),
+                ImgUrl = x
+            }).ToList() ?? new List<ImgSrc>();
+
+            singleProd.IntPrice = (int)item.Price;
+            singleProd.IntCents = (int)((item.Price - (int)item.Price) * 100);
+
+
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpGet("Epizone/Delete/{id:guid}")]
+        public IActionResult Delete(Guid id)
+        {
+            var singleProd = productStaticList.FirstOrDefault(item => item.Id == id);
+            if (singleProd == null)
+            {
+                TempData["Error"] = "Il prodotto cercato non esiste nei nostri archivi!";
+                return RedirectToAction("Index");
+            }
+
+            var remove = productStaticList.Remove(singleProd);
+            if (!remove)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
 
     }
 }

@@ -1,0 +1,82 @@
+﻿@model ProductDetailsModel
+@{
+    ViewData["Title"] = "Epizone - Modifica Prodotto";
+}
+
+<div class="container">
+    <h1>Modifica il tuo prodotto</h1>
+    <form id="prodForm" class="mt-4" asp-controller="Epizone" asp-action="SaveEdit" asp-route-id="@Model.Id">
+        <div class="mb-3 form-floating">
+            <input type="text" class="form-control" id="name" placeholder="Inserisci il nome del prodotto" required
+                   autocomplete="off" asp-for="Name">
+            <label for="Name" class="text-secondary">Product Name</label>
+        </div>
+        <div class="d-flex gap-3 mb-4">
+            <div class="col form-floating">
+                <input type="text" class="form-control" id="brand" placeholder="Inserisci la marca"
+                       aria-label="Brand" required autocomplete="off" asp-for="Brand">
+                <label for="Brand" class="text-secondary">Brand</label>
+            </div>
+            <div class="col form-floating">
+                <input type="number" class="form-control" id="price" placeholder="€" aria-label="Price" required
+                       autocomplete="off" step="0.01" asp-for="Price">
+                <label for="price" class="text-secondary">Price</label>
+            </div>
+        </div>
+
+        <div id="image-container">
+             @foreach (var (item, index) in Model.ImgList.Select((item, index) => (item, index)))
+            {
+                <div class="d-flex">
+                    <span class="input-group-text mb-3">https://example.com/photo.jpg</span>
+                    <div class="mb-3 form-floating flex-grow-1">
+                        <input type="text" class="form-control" placeholder="Inserisci l'URL dell'immagine"
+                               required autocomplete="off" name="ImgListModel" value="@item.ImgUrl">
+                        <label for="image-@index" class="text-secondary">URL dell'immagine</label>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="new-img">
+
+        </div>
+        <a class="btn btn-light mb-3 btn-sm" id="add-btn"> Aggiungi immagine</a>
+
+        <div class="form-floating mb-3">
+            <textarea class="form-control" placeholder="Leave a comment here" id="description"
+                      style="height: 100px" asp-for="Description"></textarea>
+            <label for="description" class="text-secondary">Descrizione del prodotto</label>
+        </div>
+        <div class="container-fluid gap-3 d-flex justify-content-between p-0">
+            <a type="button" class="btn btn-danger" asp-controller="Epizone" asp-action="Delete" asp-route-id="@Model.Id">Cancella</a>
+            <div>
+                <button type="submit" class="btn btn-warning" >Salva Modifiche</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+         let imageIndex = @Model.ImgList.Count;
+
+        document.getElementById("add-btn").addEventListener("click", function () {
+            if (imageIndex >= 5) {
+                alert("Hai raggiunto il limite massimo di immagini");
+                return;
+            }
+                   document.getElementById("new-img").innerHTML= `
+            <div class="d-flex">
+                <span class="input-group-text mb-3" id="basic-addon3">https://example.com/photo.jpg</span>
+                <div class="mb-3 form-floating flex-grow-1">
+                    <input type="text" class="form-control" id="image" placeholder="Inserisci l'URL dell'immagine"
+                        required autocomplete="off" name="ImgListModel">
+                    <label for="image" class="text-secondary">Product ImageURL</label>
+                </div>
+            </div>
+        `
+        });
+    </script>
+}
