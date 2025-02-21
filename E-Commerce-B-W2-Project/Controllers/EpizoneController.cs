@@ -37,13 +37,59 @@ namespace E_Commerce_B_W2_Project.Controllers
                 {
                    new ImgSrc(){Id= Guid.NewGuid(),ImgUrl= "https://img01.ztat.net/article/spp-media-p1/50f9d30cb5e14ced904baf38ad4136c5/6a65ead4a020452b8ed819e978f122a8.jpg?imwidth=1800&filter=packshot"},
                    new ImgSrc (){Id= Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/06aaf053f253415397bcb0ce18250c3b/fca9b9b79bd44563933689e78dcd2a6c.jpg?imwidth=1800"},
+                   new ImgSrc (){Id= Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/ccb7b2ad4ca84d52862f4521b4d5cf10/d315d7d2067942d4a93c810551db1b24.jpg?imwidth=1800"},
+                   new ImgSrc(){Id=Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/82fffd7131fd459883ba5895c987ff00/47b02637815d49549944d710ceba8a4a.jpg?imwidth=1800"}
+
                 },
                 Comment = new Random().Next(50, 50000),
                 Sales = new Random().Next(30, 250),
                 IntPrice = 149,
                 IntCents = 99,
                 Consegna = DateTime.Now.AddDays(1).ToString("dddd, dd MMMM", new System.Globalization.CultureInfo("it-IT"))
-            }
+            },
+           new ProductBaseModel()
+            {
+                Id= Guid.NewGuid(),
+                Name= "Sandali - white",
+                Brand= "Anna Field",
+                Price=39.99m,
+                Description="Punta: Aperta\r\nTipo di tacco: Tacco largo\r\nChiusura: Fibbia\r\nFantasia: Monocromo\r\nDettagli: Elastico interno\r\nCodice articolo: AN611A1BI-A11",
+               ImgListModel= new List<ImgSrc>()
+                {
+                   new ImgSrc(){Id= Guid.NewGuid(),ImgUrl= "https://img01.ztat.net/article/spp-media-p1/8d6ec7fec3094965938e7189d44e67d1/e9d55851ff9a40e598e652146592b650.jpg?imwidth=1800&filter=packshot"},
+                   new ImgSrc (){Id= Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/4ec3c9491f47490f9109afb0b467c37f/8ab66506a2ac4a9aa04093d55198fd50.jpg?imwidth=1800"},
+                   new ImgSrc (){Id= Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/51dfe6b1212d482b82816e6a4ece5207/777ad5d9c12e495388abd013610ca715.jpg?imwidth=1800"},
+                   new ImgSrc(){Id=Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/89e037ef6e354289a0f1a257baead75c/0ec0f54c510b45cd94f29d730eb4450b.jpg?imwidth=1800"}
+
+                },
+                Comment = new Random().Next(50, 50000),
+                Sales = new Random().Next(30, 250),
+                IntPrice = 39,
+                IntCents = 99,
+                Consegna = DateTime.Now.AddDays(1).ToString("dddd, dd MMMM", new System.Globalization.CultureInfo("it-IT"))
+            },
+                       new ProductBaseModel()
+            {
+                Id= Guid.NewGuid(),
+                Name= "UNISEX - Stringate - black",
+                Brand= "YOURTURN",
+                Price=35.99m,
+                Description="Punta: Tonda\r\nTipo di tacco: Tacco largo\r\nChiusura: Lacci\r\nFantasia: Monocromo\r\nCodice articolo: YO115M00B-Q11",
+               ImgListModel= new List<ImgSrc>()
+                {
+                   new ImgSrc(){Id= Guid.NewGuid(),ImgUrl= "https://img01.ztat.net/article/spp-media-p1/8efeb57cf73241ad8a6b8c48f4e2587c/3915a4c519894dfc995f73a0fdb3406e.jpg?imwidth=1800&filter=packshot"},
+                   new ImgSrc (){Id= Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/ad4565e690934d8e87c5e5246abe8077/4d3d2d01b50b48c5bafa0ed05fe9dd44.jpg?imwidth=1800"},
+                   new ImgSrc (){Id= Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/2b6d5326101c4cf99c6bd49cd16ae3d2/abf4ea0eadbf401c8fc6d7f6ac57103a.jpg?imwidth=1800"},
+                   new ImgSrc(){Id=Guid.NewGuid(), ImgUrl="https://img01.ztat.net/article/spp-media-p1/40602fb38cfa4bd1ae85e6cc8f5a62b4/da6e8551db604d8b8106f4df0970350d.jpg?imwidth=1800"}
+
+                },
+                Comment = new Random().Next(50, 50000),
+                Sales = new Random().Next(30, 250),
+                IntPrice = 35,
+                IntCents = 99,
+                Consegna = DateTime.Now.AddDays(1).ToString("dddd, dd MMMM", new System.Globalization.CultureInfo("it-IT"))
+            },
+
         ];
 
 
